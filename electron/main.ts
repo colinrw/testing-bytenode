@@ -1,3 +1,4 @@
+import { WebhookClient } from 'discord.js'
 import { app, BrowserWindow, ipcMain } from 'electron'
 
 let mainWindow: BrowserWindow | null
@@ -24,6 +25,8 @@ function createWindow () {
   })
 
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
+
+  mainWindow.webContents.openDevTools();
 
   mainWindow.on('closed', () => {
     mainWindow = null
@@ -54,4 +57,15 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow()
   }
+})
+
+ipcMain.handle('testing', async () => {
+  console.log('hello world')
+  return 'hello world'
+})
+
+ipcMain.handle('discordWebhook', async (event, url: string) => {
+  console.log('1: ', process.versions.node)
+  // const webhook = new WebhookClient({ url })
+  console.log('2')
 })

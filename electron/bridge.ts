@@ -13,6 +13,14 @@ export const api = {
     ipcRenderer.send('message', message)
   },
 
+  testing: async () => {
+    return await ipcRenderer.invoke('testing')
+  },
+
+  discordWebhook: async (url: string) => {
+    return await ipcRenderer.invoke('discordWebhook', url)
+  },
+
   /**
    * Provide an easier way to listen to events
    */
