@@ -17,9 +17,13 @@ export const api = {
     return await ipcRenderer.invoke('testing')
   },
 
-  discordWebhook: async (url: string) => {
-    return await ipcRenderer.invoke('discordWebhook', url)
-  },
+  // discordWebhook: async (url: string) => {
+  //   return await ipcRenderer.invoke('discordWebhook', url)
+  // },
+
+  // getAppVersion: async () => {
+  //   return await ipcRenderer.invoke('getAppVersion')
+  // },
 
   /**
    * Provide an easier way to listen to events

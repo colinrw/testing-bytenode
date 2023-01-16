@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-typescript",
-  "author": "Diego Fernandes <diego.schell.f@gmail.com>",
-  "version": "2.0.0",
-  "description": "An Electron boilerplate including TypeScript, React, Jest and ESLint.",
+  "name": "auto-updater",
+  "author": "Colin",
+  "version": "0.0.1",
+  "description": "Testing Auto Updater for Electron.",
   "main": "./.webpack/main/index.js",
   "scripts": {
     "build": "electron-builder",
@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "^14.6.0",
+    "moralis": "^2.9.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hot-loader": "4.13.0",
@@ -47,8 +48,9 @@
     "@typescript-eslint/parser": "4.27.0",
     "babel-loader": "8.2.2",
     "cross-env": "7.0.3",
-    "electron": "^13.1.2",
+    "electron": "^20.0.2",
     "electron-builder": "^23.3.3",
+    "electron-updater": "^5.3.0",
     "eslint": "7.29.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-standard": "16.0.3",

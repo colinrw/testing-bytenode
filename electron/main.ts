@@ -1,5 +1,6 @@
-import { WebhookClient } from 'discord.js'
+import { autoUpdater } from 'electron-updater'
 import { app, BrowserWindow, ipcMain } from 'electron'
+// import { } from 'electron-builder'
 
 let mainWindow: BrowserWindow | null
 
@@ -11,18 +12,22 @@ declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
 //     ? process.resourcesPath
 //     : app.getAppPath()
 
-function createWindow () {
+function createWindow() {
   mainWindow = new BrowserWindow({
     // icon: path.join(assetsPath, 'assets', 'icon.png'),
     width: 1100,
     height: 700,
     backgroundColor: '#191622',
     webPreferences: {
-      nodeIntegration: false,
+      nodeIntegration: true,
       contextIsolation: true,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
     }
   })
+
+  if (app.isPackaged) {
+    // autoUpdater.checkForUpdates()
+  }
 
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
 
@@ -33,7 +38,7 @@ function createWindow () {
   })
 }
 
-async function registerListeners () {
+async function registerListeners() {
   /**
    * This comes from bridge integration, check bridge.ts
    */
@@ -42,7 +47,10 @@ async function registerListeners () {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+  createWindow()
+  autoUpdater.checkForUpdates()
+})
   .whenReady()
   .then(registerListeners)
   .catch(e => console.error(e))
@@ -62,10 +70,4 @@ app.on('activate', () => {
 ipcMain.handle('testing', async () => {
   console.log('hello world')
   return 'hello world'
-})
-
-ipcMain.handle('discordWebhook', async (event, url: string) => {
-  console.log('1: ', process.versions.node)
-  // const webhook = new WebhookClient({ url })
-  console.log('2')
 })
